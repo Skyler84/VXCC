@@ -25,3 +25,4 @@ else (DOXYGEN_FOUND)
 endif (DOXYGEN_FOUND)
 endif(BUILD_DOC)
 
+add_subdirectory(src)
