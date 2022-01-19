@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <map>
+#include <set>
 
 static std::map<std::string_view, CToken::Keyword> keywords{
 #define KEYWORD(x)                                                             \
@@ -43,16 +44,13 @@ bool isIdentChar(char c) {
   return false;
 }
 bool isWhitespace(char c) {
-  constexpr static std::string_view ws{" \r\n\t\v"};
-  if (std::find(ws.begin(), ws.end(), c) != ws.end())
+  const static std::set<char> ws{' ', '\r', '\n', '\t', '\v'};
+  if (ws.contains(c))
     return true;
   return false;
 }
 bool matchesPunctuator(const std::string &str) {
-  auto it =
-      std::find_if(punctuators.begin(), punctuators.end(),
-                   [&](auto &pair) { return pair.first.starts_with(str); });
-  if (it != punctuators.end())
+  if (punctuators.contains(str))
     return true;
   return false;
 }
@@ -74,6 +72,9 @@ bool CLexer::lex() {
           token += c;
         } else if (isWhitespace(c)) {
           goto next;
+        } else {
+          // invalid token
+          return false;
         }
         break;
       }
@@ -96,7 +97,13 @@ bool CLexer::lex() {
         token += c;
         if (matchesPunctuator(token))
           continue;
+        if (token == "..") // Explicit case where token is between two
+                           // punctuators - . ...
+          continue;
         token.pop_back();
+        if (token == "..") // Explicit case where token is between two
+                           // punctuators - . ...
+          return false;
         tokens().emplace_back(std::make_unique<CToken>(type, std::move(token)));
         type = CToken::Type::None;
         break;
