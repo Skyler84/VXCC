@@ -39,6 +39,12 @@ bool CLexer::matchesPunctuator(const std::string &str) {
   return false;
 }
 
+bool CLexer::isDigit(char c) {
+  if(c >= '0' && c <= '9')
+    return true;
+  return false;
+}
+
 bool CLexer::lex() {
   char c;
   std::string token;
@@ -56,10 +62,22 @@ bool CLexer::lex() {
           token += c;
         } else if (isWhitespace(c)) {
           goto next;
+        } else if(isDigit(c)){
+          type = CToken::Type::Constant;
+          token += c;
         } else {
           // invalid token
           return false;
         }
+        break;
+      }
+      case CToken::Type::Constant: {
+        if(isDigit(c)){
+          token += c;
+          continue;
+        }
+        tokens().emplace_back(std::make_unique<CToken>(type, std::move(token)));
+        type = CToken::Type::None;
         break;
       }
       case CToken::Type::Identifier: {
