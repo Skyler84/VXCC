@@ -32,7 +32,7 @@ public:
    */
   template <class T = Token>
   requires(std::is_base_of_v<Token, T>) T &currentToken() {
-    return *m_cur_pos[0];
+    return static_cast<T &>(*m_cur_pos[0]);
   }
 
   /**
@@ -40,7 +40,7 @@ public:
    */
   template <class T = Token>
   requires(std::is_base_of_v<Token, T>) T &peekToken(int idx = 0) {
-    return *m_cur_pos[idx + 1];
+    return static_cast<T &>(*m_cur_pos[idx + 1]);
   }
 
   /**
