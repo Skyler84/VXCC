@@ -108,7 +108,9 @@ public:
     StringLiteral,
     Punctuator,
   };
-  CToken(Type t, std::string &&val) : Token(std::move(val)), m_type{t} {}
+  virtual std::unique_ptr<Token> copy() const override {
+    return _copy<CToken>();
+  }
 
   enum class Keyword {
 #define KEYWORD(x) ALIASES_RCONCAT((x), KW_)
