@@ -114,28 +114,37 @@ public:
     StringLiteral,
     Punctuator,
   };
+  CToken(Type t, std::string &&val);
   virtual std::unique_ptr<Token> copy() const override {
     return _copy<CToken>();
   }
 
   enum class Keyword {
+    None,
 #define KEYWORD(x) ALIASES_RCONCAT((x), KW_)
     C_KEYWORDS(KEYWORD)
 #undef KEYWORD
   };
   enum class Punctuator {
+    None,
 #define PUNC(aliases, op) ALIASES_NOMOD(aliases)
     C_PUNCTUATORS(PUNC)
 #undef PUNC
   };
 
   Type type() const { return m_type; }
+  Keyword keyword() const;
+  Punctuator punctuator() const;
 
   static const std::map<std::string_view, CToken::Keyword> &keywords();
   static const std::map<std::string_view, CToken::Punctuator> &punctuators();
 
 private:
   Type m_type;
+  union{
+    Keyword m_kw;
+    Punctuator m_punc;
+  };
   static std::map<std::string_view, CToken::Keyword> *s_keywords;
   static std::map<std::string_view, CToken::Punctuator> *s_punctuators;
 };
