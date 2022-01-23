@@ -7,6 +7,7 @@
 #pragma once
 
 #include "Token.hpp"
+#include "Lexer.hpp"
 #include <memory>
 #include <type_traits>
 #include <vector>
@@ -20,6 +21,18 @@ class TokenStream {
 
 public:
   using TokenStreamIterator = Container::iterator;
+
+  TokenStream(Container &&toks)
+      : m_tokens{std::move(toks)}, m_cur_pos{m_tokens.begin()} {}
+  TokenStream(Lexer &&lexer)
+      : m_tokens{std::move(lexer.m_tokens)}, m_cur_pos{m_tokens.begin()} {}
+  template <class T>
+  requires(std::is_base_of_v<Token, T>)
+      TokenStream(const std::vector<T> &toks) {
+    for (const auto &tok : toks)
+      m_tokens.emplace_back(tok.copy());
+    m_cur_pos = m_tokens.begin();
+  }
 
   /**
    * @brief Consumes the current token.
@@ -65,6 +78,6 @@ public:
   bool atEnd() const { return !remaining(); }
 
 private:
-  Container m_tokens; /**< container of Token(s)*/
+  Container m_tokens; /**< container of Token(s) immutable */
   TokenStreamIterator m_cur_pos;
 };

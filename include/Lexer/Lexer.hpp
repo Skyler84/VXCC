@@ -13,6 +13,7 @@
 #include <vector>
 
 class Lexer {
+  friend class TokenStream;
 public:
   using Container = std::vector<std::unique_ptr<Token>>;
   Lexer(std::istream &stream) : m_input_stream{stream} {}
