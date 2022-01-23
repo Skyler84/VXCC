@@ -14,4 +14,8 @@ public:
   bool lex() override;
 
 private:
+  static bool isIdentFirstChar(char c);
+  static bool isIdentChar(char c);
+  static bool isWhitespace(char c);
+  static bool matchesPunctuator(const std::string &str);
 };

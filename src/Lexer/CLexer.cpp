@@ -9,25 +9,9 @@
 #include "Lexer/CToken.hpp"
 
 #include <algorithm>
-#include <map>
 #include <set>
 
-static std::map<std::string_view, CToken::Keyword> keywords{
-#define KEYWORD(x)                                                             \
-  std::pair<std::string_view, CToken::Keyword>{#x, CToken::Keyword::KW_##x},
-    C_KEYWORDS(KEYWORD)
-#undef KEYWORDS
-};
-
-static std::map<std::string_view, CToken::Punctuator> punctuators{
-#define PUNCTUATOR(name, op)                                                   \
-  std::pair<std::string_view, CToken::Punctuator>{                             \
-      op, CToken::Punctuator::SEQ(FIRST, name)},
-    C_PUNCTUATORS(PUNCTUATOR)
-#undef PUNCTUATOR
-};
-
-bool isIdentFirstChar(char c) {
+bool CLexer::isIdentFirstChar(char c) {
   if (c >= 'a' && c <= 'z')
     return true;
   if (c >= 'A' && c <= 'Z')
@@ -36,21 +20,21 @@ bool isIdentFirstChar(char c) {
     return true;
   return false;
 }
-bool isIdentChar(char c) {
+bool CLexer::isIdentChar(char c) {
   if (isIdentFirstChar(c))
     return true;
   if (c >= '0' && c <= '9')
     return true;
   return false;
 }
-bool isWhitespace(char c) {
+bool CLexer::isWhitespace(char c) {
   const static std::set<char> ws{' ', '\r', '\n', '\t', '\v'};
   if (ws.contains(c))
     return true;
   return false;
 }
-bool matchesPunctuator(const std::string &str) {
-  if (punctuators.contains(str))
+bool CLexer::matchesPunctuator(const std::string &str) {
+  if (CToken::punctuators().contains(str))
     return true;
   return false;
 }
@@ -83,11 +67,7 @@ bool CLexer::lex() {
           token += c;
           continue;
         }
-        auto l = [&](const auto &kv) {
-          auto &[key, val] = kv;
-          return token == key;
-        };
-        if (std::find_if(keywords.begin(), keywords.end(), l) != keywords.end())
+        if (CToken::keywords().contains(token))
           type = CToken::Type::Keyword;
         tokens().emplace_back(std::make_unique<CToken>(type, std::move(token)));
         type = CToken::Type::None;

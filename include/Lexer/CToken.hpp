@@ -10,6 +10,8 @@
 
 #include "Common/Macros.hpp"
 
+#include <map>
+
 #define C_KEYWORDS(o)                                                          \
     o(auto)           \
     o(break)          \
@@ -121,6 +123,11 @@ public:
 
   Type type() const { return m_type; }
 
+  static const std::map<std::string_view, CToken::Keyword> &keywords();
+  static const std::map<std::string_view, CToken::Punctuator> &punctuators();
+
 private:
   Type m_type;
+  static std::map<std::string_view, CToken::Keyword> *s_keywords;
+  static std::map<std::string_view, CToken::Punctuator> *s_punctuators;
 };
