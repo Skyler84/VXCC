@@ -60,10 +60,10 @@
     o((Mul, Star      ), "*")\
     o((Div            ), "/")\
     o((Mod            ), "%")\
-    o((LOr            ), "|")\
-    o((Ampersand, LAnd), "&")\
-    o((BOr            ), "||")\
-    o((BAnd           ), "&&")\
+    o((BOr            ), "|")\
+    o((Ampersand, BAnd), "&")\
+    o((LOr            ), "||")\
+    o((LAnd           ), "&&")\
     o((Xor            ), "^")\
     o((Not            ), "!")\
     o((Compl, Tilde   ), "~")\
@@ -71,10 +71,14 @@
     o((MinusAssign    ), "-=")\
     o((Equal          ), "==")\
     o((NotEqual       ), "!=")\
+    o((LT             ), "<")\
+    o((GT             ), ">")\
+    o((LTEq           ), "<=")\
+    o((GTEq           ), ">=")\
     o((MulAssign      ), "*=")\
     o((DivAssign      ), "/=")\
     o((ModAssign      ), "%=")\
-    o((LOrAssign      ), "|=")\
+    o((OrAssign       ), "|=")\
     o((AndAssign      ), "&=")\
     o((XorAssign      ), "^=")\
     o((LShift         ), "<<")\
@@ -83,7 +87,9 @@
     o((RShiftAssign   ), ">>=")\
     o((Ternary        ), "?")\
     o((Colon          ), ":")\
-    o((Comma          ), ",")
+    o((Comma          ), ",")\
+    o((Dot            ), ".")\
+    o((Pointer        ), "->")
 
 #define C_PUNCTUATION(o)\
     o((LParen    ), "(")\
