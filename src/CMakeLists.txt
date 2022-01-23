@@ -14,6 +14,7 @@ PRIVATE
   Lexer/CLexer.cpp
   Lexer/CToken.cpp
   Lexer/TokenStream.cpp
+  Parser/CParser.cpp
   Parser/Parser.cpp
 )
 
