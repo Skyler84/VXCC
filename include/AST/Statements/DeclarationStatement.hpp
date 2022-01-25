@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "AST/Declarations/BlockDeclarations/BlockDeclaration.hpp"
 #include "AST/Statements/Statement.hpp"
+#include "AST/Declarations/Declaration.hpp"
 
 namespace AST {
 class DeclarationStatement final : public Statement {

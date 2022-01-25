@@ -8,6 +8,8 @@
 
 #include "AST/Attribute.hpp"
 #include "AST/Declarations/Declarators/Declarator.hpp"
+#include <memory>
+#include <vector>
 
 namespace AST {
 
@@ -18,14 +20,11 @@ public:
     LRef,
     RRef,
   };
-  PtrOperator(OpType op) : PtrOperator{op, {}, {}} {}
-  PtrOperator(OpType op, std::vector<std::unique_ptr<TypeQualifier>> &&ts)
-      : PtrOperator{op, {}, std::move(ts)} {}
-  PtrOperator(OpType op, std::vector<std::unique_ptr<AttributeSpecifier>> &&as)
-      : PtrOperator{op, std::move(as), {}} {}
+  PtrOperator(OpType op);
+  PtrOperator(OpType op, std::vector<std::unique_ptr<TypeQualifier>> &&ts);
+  PtrOperator(OpType op, std::vector<std::unique_ptr<AttributeSpecifier>> &&as);
   PtrOperator(OpType op, std::vector<std::unique_ptr<AttributeSpecifier>> &&as,
-              std::vector<std::unique_ptr<TypeQualifier>> &&ts)
-      : m_op{op}, m_attrs{std::move(as)}, m_type_quals{std::move(ts)} {}
+              std::vector<std::unique_ptr<TypeQualifier>> &&ts);
   OpType op() const { return m_op; }
 
 private:

@@ -5,12 +5,25 @@ PRIVATE
   AST/AST.cpp
   AST/TranslationUnit.cpp
   AST/Declarations/Declaration.cpp
+  AST/Declarations/DeclSpecifier.cpp
+  AST/Declarations/FunctionBody.cpp
   AST/Declarations/FunctionDefinition.cpp
+  AST/Declarations/Initializer.cpp
   AST/Declarations/BlockDeclarations/BlockDeclaration.cpp
+  AST/Declarations/BlockDeclarations/SimpleDeclaration.cpp
+  AST/Declarations/Declarators/DeclaratorId.cpp
+  AST/Declarations/Declarators/InitDeclarator.cpp
+  AST/Declarations/Declarators/PtrDeclarator.cpp
+  AST/Declarations/Declarators/FunctionDeclarator.cpp
   AST/Expressions/Expression.cpp
   AST/Expressions/BinaryExpression.cpp
   AST/Expressions/UnaryExpression.cpp
   AST/Expressions/PostfixExpression.cpp
+  AST/Expressions/PrimaryExpression.cpp
+  AST/Statements/CompoundStatement.cpp
+  AST/Statements/DeclarationStatement.cpp
+  AST/Statements/JumpStatement.cpp
+  AST/Statements/SelectionStatement.cpp
   Lexer/CLexer.cpp
   Lexer/CToken.cpp
   Lexer/TokenStream.cpp

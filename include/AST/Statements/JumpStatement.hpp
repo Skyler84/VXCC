@@ -8,6 +8,8 @@
 
 #include "AST/Statements/Statement.hpp"
 
+#include <memory>
+
 namespace AST {
 class JumpStatement final : public Statement {
 public:
@@ -17,12 +19,9 @@ public:
     Return,
     Goto,
   };
-  JumpStatement(JumpType t)
-      : Statement{StatementType::JumpStatement}, m_type{t} {}
-  JumpStatement(std::unique_ptr<Expression> &&expr)
-      : Statement{StatementType::JumpStatement}, m_type{JumpType::Return},
-        m_expr{std::move(expr)} {}
-  ~JumpStatement() {}
+  JumpStatement(JumpType t);
+  JumpStatement(std::unique_ptr<Expression> &&expr);
+  ~JumpStatement();
 
 private:
   JumpType m_type;

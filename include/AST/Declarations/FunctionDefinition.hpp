@@ -22,20 +22,13 @@ public:
       std::vector<std::unique_ptr<DeclSpecifier>> &&declspec_seq,
       std::unique_ptr<Declarator> &&decl,
       std::vector<std::unique_ptr<Declaration>> &&declarations,
-      std::unique_ptr<FunctionBody> &&body)
-      : m_attr_seq{std::move(attr_seq)},
-        m_declspec_seq{std::move(declspec_seq)}, m_decl{std::move(decl)},
-        m_declarations{std::move(declarations)}, m_body{std::move(body)} {}
-
+      std::unique_ptr<FunctionBody> &&body);
   FunctionDefinition(
       std::vector<std::unique_ptr<DeclSpecifier>> &&declspec_seq,
       std::unique_ptr<Declarator> &&decl,
       std::vector<std::unique_ptr<Declaration>> &&declarations,
-      std::unique_ptr<FunctionBody> &&body)
-      : m_declspec_seq{std::move(declspec_seq)}, m_decl{std::move(decl)},
-        m_declarations{std::move(declarations)}, m_body{std::move(body)} {}
-
-  void dump(std::ostream&, size_t ident) const override;
+      std::unique_ptr<FunctionBody> &&body);
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   std::vector<std::unique_ptr<AttributeSpecifier>> m_attr_seq;

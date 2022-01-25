@@ -12,9 +12,15 @@
 namespace AST {
 class SimpleDeclaration : public BlockDeclaration {
 public:
+  SimpleDeclaration(
+      std::vector<std::unique_ptr<DeclSpecifier>> &&declspecs,
+      std::vector<std::unique_ptr<InitDeclarator>> &&initdecls);
+
 private:
-  std::vector<std::unique_ptr<AttributeSpecifier>> m_attrs; /**< Only applicable to C++ (officially) */
-  std::vector<std::unique_ptr<DeclarationSpecifier>> m_declspecs;
+  std::vector<std::unique_ptr<AttributeSpecifier>>
+      m_attrs; /**< Only applicable to C++
+                  (officially) */
+  std::vector<std::unique_ptr<DeclSpecifier>> m_declspecs;
   std::vector<std::unique_ptr<InitDeclarator>> m_initdecls;
 };
 } // namespace AST

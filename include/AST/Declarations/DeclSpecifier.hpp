@@ -68,7 +68,7 @@ public:
 private:
   DefiningType m_type;
 };
-class SimpleTypeSpecifier : public DefiningTypeSpecifier {
+class SimpleTypeSpecifier final : public DefiningTypeSpecifier {
 public:
   enum class TypeWord {
     Void,
@@ -85,7 +85,7 @@ public:
     Unsigned,
     Signed,
     Bool,
-    Complex
+    Complex,
   };
   SimpleTypeSpecifier(TypeWord word)
       : DefiningTypeSpecifier{DefiningType::TypeSpecifier}, m_word{word} {}

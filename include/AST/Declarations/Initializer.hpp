@@ -8,6 +8,8 @@
 
 #include "AST/AST.hpp"
 
+#include <memory>
+
 namespace AST {
 
 class Initializer final : public AstNode {
@@ -16,12 +18,9 @@ public:
     Expression,
     InitializerList,
   };
-  Initializer(std::unique_ptr<Expression> &&expr)
-      : m_type{InitializerType::Expression}, m_expr{std::move(expr)} {}
-  Initializer(std::unique_ptr<InitializerList> &&init_list)
-      : m_type{InitializerType::InitializerList}, m_init_list{
-                                                      std::move(init_list)} {}
-  ~Initializer() {}
+  Initializer(std::unique_ptr<Expression> &&expr);
+  Initializer(std::unique_ptr<InitializerList> &&init_list);
+  ~Initializer();
 
 private:
   InitializerType m_type;

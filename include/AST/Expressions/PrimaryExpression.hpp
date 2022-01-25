@@ -9,6 +9,8 @@
 #include "AST/AST.hpp"
 #include "AST/Expressions/Expression.hpp"
 
+#include <memory>
+
 namespace AST {
 class PrimaryExpression : public Expression {
 public:

@@ -14,9 +14,7 @@
 namespace AST {
 class CompoundStatement final : public Statement {
 public:
-  CompoundStatement(std::vector<std::unique_ptr<Statement>> &&statements)
-      : Statement{StatementType::CompoundStatement}, m_statements{std::move(
-                                                         statements)} {}
+  CompoundStatement(std::vector<std::unique_ptr<Statement>> &&statements);
 
 private:
   std::vector<std::unique_ptr<Statement>> m_statements;

@@ -9,6 +9,12 @@
 #include "AST/AST.hpp"
 #include "AST/Statements/Forward.hpp"
 
+#include <memory>
+#include <vector>
+
+//FIXME: outline constructor
+#include "AST/Attribute.hpp"
+
 namespace AST {
 class Statement : public AstNode {
 public:

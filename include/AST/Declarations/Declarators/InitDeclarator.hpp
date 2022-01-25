@@ -8,6 +8,12 @@
 
 #include "AST/AST.hpp"
 
+#include <memory>
+
+// FIXME: outline
+#include "AST/Declarations/Declarators/Declarator.hpp"
+#include "AST/Declarations/Initializer.hpp"
+
 namespace AST {
 class InitDeclarator : public AstNode {
 public:

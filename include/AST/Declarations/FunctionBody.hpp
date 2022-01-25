@@ -8,6 +8,8 @@
 
 #include "AST/AST.hpp"
 
+#include <memory>
+
 namespace AST {
 
 class FunctionBody : public AstNode {
@@ -18,8 +20,7 @@ public:
     Default,
     Delete,
   };
-  FunctionBody(std::unique_ptr<CompoundStatement> &&body)
-      : m_type{BodyType::CompoundStatement}, m_body{std::move(body)} {}
+  FunctionBody(std::unique_ptr<CompoundStatement> &&body);
 
 private:
   BodyType m_type;
