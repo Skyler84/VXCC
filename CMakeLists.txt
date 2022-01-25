@@ -26,3 +26,4 @@ endif (DOXYGEN_FOUND)
 endif(BUILD_DOC)
 
 add_subdirectory(src)
+add_subdirectory(app)
