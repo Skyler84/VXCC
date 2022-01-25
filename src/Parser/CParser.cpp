@@ -5,6 +5,7 @@
  */
 
 #include "Parser/CParser.hpp"
+#include "AST/Declarations/BlockDeclarations/SimpleDeclaration.hpp"
 #include "AST/Declarations/DeclSpecifier.hpp"
 #include "AST/Declarations/Declaration.hpp"
 #include "AST/Declarations/Declarators/Declarator.hpp"
@@ -93,10 +94,8 @@ std::unique_ptr<Declaration> CParser::parseDeclaration() {
     TODO(Error : Missing semicolon);
   }
   toks().consumeToken();
-  // return std::make_unique<Declaration>()
-  UNIMPLEMENTED();
-  return {};
-  ;
+  return std::make_unique<SimpleDeclaration>(std::move(decl_specs),
+                                             std::move(init));
 }
 std::vector<std::unique_ptr<Declaration>> CParser::parseDeclarationList() {
   std::vector<std::unique_ptr<Declaration>> declarations;
@@ -584,8 +583,34 @@ std::unique_ptr<AST::Statement> CParser::parseStatement() {
 
 std::unique_ptr<AST::SelectionStatement> CParser::parseIfStatement() {
   VERIFY(toks().currentToken<CToken>().keyword() == CToken::Keyword::KW_if);
-  UNIMPLEMENTED(if statement);
-  return {};
+  toks().consumeToken();
+  if (toks().currentToken<CToken>().punctuator() !=
+      CToken::Punctuator::LParen) {
+    TODO(Error missing lparen);
+  }
+  toks().consumeToken();
+  auto expr = parseExpression();
+  // TODO: Check if type convertible to bool
+
+  if (toks().currentToken<CToken>().punctuator() !=
+      CToken::Punctuator::RParen) {
+    TODO(Error missing rparen);
+  }
+  toks().consumeToken();
+  auto st = parseStatement();
+  if (!st) {
+    TODO(Error expected statement after if);
+  }
+  if (toks().currentToken<CToken>().keyword() != CToken::Keyword::KW_else) {
+    return std::make_unique<SelectionStatement>(std::move(expr), std::move(st));
+  }
+  toks().consumeToken();
+  auto else_st = parseStatement();
+  if (!else_st) {
+    TODO(error expected statement after else);
+  }
+  return std::make_unique<SelectionStatement>(std::move(expr), std::move(st),
+                                              std::move(else_st));
 }
 
 std::unique_ptr<AST::SelectionStatement> CParser::parseSwitchStatement() {
