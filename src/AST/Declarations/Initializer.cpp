@@ -17,3 +17,17 @@ Initializer::Initializer(std::unique_ptr<InitializerList> &&init_list)
                                                     std::move(init_list)} {}
 Initializer::~Initializer() { UNIMPLEMENTED(); }
 
+void Initializer::dump(std::ostream &stream, size_t indent, size_t step) const {
+  stream << std::string(indent, ' ');
+  stream << "Initializer: \n";
+  switch (m_type) {
+  case InitializerType::Expression:
+    m_expr->dump(stream, indent + step, step);
+    return;
+  case InitializerType::InitializerList:
+    m_init_list->dump(stream, indent + step, step);
+    return;
+  default:
+    UNREACHABLE();
+  }
+}

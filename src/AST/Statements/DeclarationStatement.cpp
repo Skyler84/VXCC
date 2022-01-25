@@ -9,3 +9,8 @@
 
 using namespace AST;
 
+void DeclarationStatement::dump(std::ostream &stream, size_t indent,
+                                size_t step) const {
+  stream << std::string(indent, ' ') << "DeclarationStatement:\n";
+  m_decl->dump(stream, indent + step, step);
+}

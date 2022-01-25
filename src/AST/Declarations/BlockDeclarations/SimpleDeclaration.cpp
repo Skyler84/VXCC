@@ -16,3 +16,11 @@ SimpleDeclaration::SimpleDeclaration(
       std::vector<std::unique_ptr<InitDeclarator>> &&initdecls)
       : BlockDeclaration{}, m_declspecs{std::move(declspecs)}, m_initdecls{std::move(initdecls)} {}
 
+void SimpleDeclaration::dump(std::ostream &stream, size_t indent, size_t step) const {
+  stream << std::string(indent, ' ');
+  stream << "SimpleDeclaration:\n";
+  for(auto &declspec : m_declspecs)
+    declspec->dump(stream, indent+step, step);
+  for(auto &initdecl : m_initdecls)
+    initdecl->dump(stream, indent+step, step);
+}

@@ -16,6 +16,7 @@ public:
       : NoptrDeclarator{NoptrDeclType::DeclaratorId}, m_ident{std::move(ident)} {}
 
   const std::string &ident() const { return m_ident; }
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   std::string m_ident;

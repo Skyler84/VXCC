@@ -20,6 +20,7 @@ public:
   InitDeclarator(std::unique_ptr<Declarator> &&decl,
                  std::unique_ptr<Initializer> &&init)
       : m_decl{std::move(decl)}, m_init{std::move(init)} {}
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   std::unique_ptr<Declarator> m_decl;

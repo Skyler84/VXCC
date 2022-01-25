@@ -30,6 +30,8 @@ public:
   ~PrimaryExpression() {}
   ExpressionType type() const { return m_type; }
 
+  void dump(std::ostream &, size_t indent, size_t step) const override;
+
 private:
   ExpressionType m_type;
   union {

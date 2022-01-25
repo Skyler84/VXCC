@@ -15,6 +15,7 @@ public:
   SimpleDeclaration(
       std::vector<std::unique_ptr<DeclSpecifier>> &&declspecs,
       std::vector<std::unique_ptr<InitDeclarator>> &&initdecls);
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   std::vector<std::unique_ptr<AttributeSpecifier>>

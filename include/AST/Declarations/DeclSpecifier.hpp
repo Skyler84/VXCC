@@ -90,6 +90,7 @@ public:
   SimpleTypeSpecifier(TypeWord word)
       : DefiningTypeSpecifier{DefiningType::TypeSpecifier}, m_word{word} {}
   TypeWord word() const { return m_word; }
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   TypeWord m_word;

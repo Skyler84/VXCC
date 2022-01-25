@@ -33,3 +33,4 @@ void FunctionDefinition::dump(std::ostream &stream, size_t indent,
   m_decl->dump(stream, indent + step, step);
   m_body->dump(stream, indent + step, step);
 }
+ 

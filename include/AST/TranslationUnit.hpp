@@ -13,7 +13,7 @@
 
 class AST::TranslationUnit : public AstNode {
 public:
-  void dump(std::ostream &stream, size_t ident) const override;
+  void dump(std::ostream &stream, size_t indent, size_t step) const override;
   void add(std::unique_ptr<TopLevelDeclaration> &&decl) {
     m_declarations.emplace_back(std::move(decl));
   }

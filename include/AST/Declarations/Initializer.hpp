@@ -21,6 +21,7 @@ public:
   Initializer(std::unique_ptr<Expression> &&expr);
   Initializer(std::unique_ptr<InitializerList> &&init_list);
   ~Initializer();
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   InitializerType m_type;

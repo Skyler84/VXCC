@@ -12,7 +12,8 @@
 namespace AST {
 class AstNode {
 public:
-  virtual void dump(std::ostream&, size_t ident) const;
+  virtual void dump(std::ostream &, size_t ident, size_t step) const;
+
 private:
 };
 } // namespace AST

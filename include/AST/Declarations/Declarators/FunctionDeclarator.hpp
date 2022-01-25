@@ -26,6 +26,7 @@ public:
                      std::vector<std::string> &&idents);
   ~FunctionDeclarator();
   ParamType paramType() const { return m_param_type; }
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   std::unique_ptr<NoptrDeclarator> m_decl;

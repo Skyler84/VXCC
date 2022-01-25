@@ -8,8 +8,8 @@
 
 using namespace AST;
 
-void AstNode::dump(std::ostream &stream, size_t ident) const {
-  stream << std::string(ident, ' ');
+void AstNode::dump(std::ostream &stream, size_t indent, size_t step) const {
+  stream << std::string(indent, ' ');
   stream << typeid(*this).name() << '\n';
-  stream << std::string(ident, ' ') << "AstNode::dump() unimplemented\n";
+  stream << std::string(indent, ' ') << "AstNode::dump() unimplemented\n";
 }

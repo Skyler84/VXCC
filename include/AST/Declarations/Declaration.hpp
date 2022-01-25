@@ -43,7 +43,7 @@ public:
                        std::unique_ptr<AbstractDeclarator> &&abs_decl);
   ~ParameterDeclaration();
   DeclType declType() const { return m_decltype; }
-
+  void dump(std::ostream&, size_t indent, size_t step) const override;
 private:
   DeclType m_decltype;
   std::vector<std::unique_ptr<DeclSpecifier>> m_declspecs;

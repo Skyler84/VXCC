@@ -22,6 +22,7 @@ public:
   JumpStatement(JumpType t);
   JumpStatement(std::unique_ptr<Expression> &&expr);
   ~JumpStatement();
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   JumpType m_type;

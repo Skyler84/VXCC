@@ -11,6 +11,9 @@
 namespace AST {
 class BlockDeclaration : public Declaration {
 public:
+  enum class BlockDeclType{
+    SimpleDeclaration,
+  };
 private:
 };
 } // namespace AST

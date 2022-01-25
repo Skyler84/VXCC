@@ -27,6 +27,7 @@ public:
         m_expr(std::move(expr)), m_if_statements{std::move(if_true),
                                                  std::move(if_false)} {}
   ~SelectionStatement() {}
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   SelectionType m_seltype;
@@ -37,7 +38,7 @@ private:
       std::unique_ptr<Statement> m_if_false;
     } m_if_statements;
     std::map<unsigned long, int> m_case_statements;
-};
+  };
 };
 
 } // namespace AST

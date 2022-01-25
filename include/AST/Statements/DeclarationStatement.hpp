@@ -14,6 +14,7 @@ class DeclarationStatement final : public Statement {
 public:
   DeclarationStatement(std::unique_ptr<Declaration> &&decl)
       : Statement{StatementType::DeclarationStatement}, m_decl{std::move(decl)} {}
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   std::unique_ptr<Declaration> m_decl;

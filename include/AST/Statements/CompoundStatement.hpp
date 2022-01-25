@@ -15,6 +15,7 @@ namespace AST {
 class CompoundStatement final : public Statement {
 public:
   CompoundStatement(std::vector<std::unique_ptr<Statement>> &&statements);
+  void dump(std::ostream&, size_t indent, size_t step) const override;
 
 private:
   std::vector<std::unique_ptr<Statement>> m_statements;

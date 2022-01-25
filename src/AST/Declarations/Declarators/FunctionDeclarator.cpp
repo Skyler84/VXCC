@@ -22,3 +22,16 @@ FunctionDeclarator::FunctionDeclarator(std::unique_ptr<NoptrDeclarator> &&decl,
       m_idents{std::move(idents)} {}
 FunctionDeclarator::~FunctionDeclarator() {}
 
+void FunctionDeclarator::dump(std::ostream &stream, size_t indent,
+                              size_t step) const {
+  stream << std::string(indent, ' ');
+  stream << "FunctionDeclarator: \n";
+  m_decl->dump(stream, indent + step, step);
+  if (m_param_type == ParamType::ParamList) {
+    for(auto &param : m_param_decls)
+      param->dump(stream, indent+step, step);
+  } else {
+    for(auto &ident : m_idents)
+      stream << std::string(indent+step, ' ') << "Param: " << ident << '\n';
+  }
+}

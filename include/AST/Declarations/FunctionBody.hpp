@@ -21,6 +21,7 @@ public:
     Delete,
   };
   FunctionBody(std::unique_ptr<CompoundStatement> &&body);
+  void dump(std::ostream &stream, size_t indent, size_t step) const override;
 
 private:
   BodyType m_type;

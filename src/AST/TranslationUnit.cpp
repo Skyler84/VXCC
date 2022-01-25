@@ -8,10 +8,10 @@
 
 using namespace AST;
 
-void TranslationUnit::dump(std::ostream &stream, size_t ident) const {
-  stream << std::string(ident, ' ')
+void TranslationUnit::dump(std::ostream &stream, size_t indent, size_t step) const {
+  stream << std::string(indent, ' ')
          << "TranslationUnit:\n";
   for (auto &decl : m_declarations) {
-    decl->dump(stream, ident+2);
+    decl->dump(stream, indent+step, step);
   }
 }

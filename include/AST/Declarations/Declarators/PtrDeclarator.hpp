@@ -26,6 +26,7 @@ public:
   PtrOperator(OpType op, std::vector<std::unique_ptr<AttributeSpecifier>> &&as,
               std::vector<std::unique_ptr<TypeQualifier>> &&ts);
   OpType op() const { return m_op; }
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   OpType m_op;
@@ -42,6 +43,7 @@ public:
       : Declarator{DeclType::PtrDeclarator}, m_ptrs{std::move(ptrs)},
         m_decl{std::move(decl)} {}
   const PtrOperator &ptr(int idx) const { return m_ptrs[idx]; }
+  void dump(std::ostream &, size_t indent, size_t step) const override;
 
 private:
   std::vector<PtrOperator> m_ptrs;
