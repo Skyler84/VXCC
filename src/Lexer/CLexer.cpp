@@ -112,5 +112,8 @@ bool CLexer::lex() {
     } while (type == CToken::Type::None);
   next:;
   }
+  if(type != CToken::Type::None)
+    tokens().emplace_back(std::make_unique<CToken>(type, std::move(token)));
+
   return true;
 }
