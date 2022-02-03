@@ -2,6 +2,8 @@
 
 vxcc is a C/C++ compiler/assember/linker written in C++. It was originally designed to target the 6502 and 65816 processor series.
 
+For instructions on building and running please refere to [BUILDING.md](./BUILDING.md)
+
 ## Features
 - [ ] C/C++ preprocessor
 - [ ] Support for multiple C/C++ standards
