@@ -27,3 +27,5 @@ endif(BUILD_DOC)
 
 add_subdirectory(src)
 add_subdirectory(app)
+add_subdirectory(test)
+file(COPY test_code/ DESTINATION test_code/)
