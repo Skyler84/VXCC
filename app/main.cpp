@@ -19,8 +19,9 @@ int main(int argc, const char *argv[]) {
                                      ArgParser::Argument::OptArg::Trailing});
   ap.addShortArg('o', ArgParser::Argument{"Output filename",
                                           ArgParser::Argument::OptArg::Extra});
-  ap.addShortArg('d', ArgParser::Argument{"Dump tokens"});
-  ap.addShortArg('D', ArgParser::Argument{"Dump AST"});
+  ap.addShortArg('D',
+                 ArgParser::Argument{"Dump T|A|I - Tokens, AST, IR",
+                                     ArgParser::Argument::OptArg::Trailing});
   ap.parse(argc, argv);
   auto &files = ap.extra();
   if (!files.size()) {
@@ -50,7 +51,8 @@ int main(int argc, const char *argv[]) {
       std::cerr << "Error lexing file: " << filename << "\n";
       std::exit(-3);
     }
-    if (ap.hasShortArg('d'))
+    auto dumpArgs = ap.getShortArg('D');
+    if (std::binary_search(dumpArgs.begin(), dumpArgs.end(), "T"))
       for (auto &tok : lexer.ctokens()) {
         auto &_tok = static_cast<const CToken &>(*tok);
         switch (_tok.type()) {
@@ -80,7 +82,7 @@ int main(int argc, const char *argv[]) {
       std::cerr << "Error parsing file: " << filename << "\n";
       std::exit(-4);
     }
-    if (ap.hasShortArg('D'))
+    if (std::binary_search(dumpArgs.begin(), dumpArgs.end(), "A"))
       parser.ast().dump(outstream, 0, 3);
   }
   return 0;
