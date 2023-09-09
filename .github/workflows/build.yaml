@@ -20,6 +20,6 @@ jobs:
       run: |
         mkdir -p build
         pushd build
-          cmake ../main
+          cmake ../main -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
           cmake --build .
         popd
