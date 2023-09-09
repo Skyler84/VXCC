@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push: 
+    branches: [ master ]
+  pull_request: 
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        path: main
+    - name: cmake
+      run: |
+        mkdir -p build
+        pushd main/build
+          cmake ..
+          cmake --build .
+        popd
